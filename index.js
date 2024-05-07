@@ -13,7 +13,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 12;
 
 const Joi = require("joi");
-const expireTime = 60 * 60 * 1000; //expires in 1 hour
+const expireTime = 1 * 60 * 60 * 1000; //expires in 1 hour
 
 const mongodb_database = process.env.MONGODB_DATABASE;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
@@ -133,6 +133,7 @@ app.post("/signupSubmit", async (req, res) => {
       req.session.name = name;
       req.session.password = password;
       req.session.cookie.maxAge = expireTime;
+      console.log(req.session.cookie.maxAge);
     } else {
       console.log("restore session");
       req.session.authenticated = true;
@@ -140,6 +141,7 @@ app.post("/signupSubmit", async (req, res) => {
       req.session.name = name;
       req.session.password = password;
       req.session.cookie.maxAge = expireTime;
+      console.log(req.session.cookie.maxAge);
     }
     res.redirect("/members");
     return;
@@ -167,8 +169,13 @@ app.post("/loggingin", async (req, res) => {
   var name = req.session.name;
   var email = req.body.email;
   var password = req.body.password;
-  const schema = Joi.string().required();
-  const validationResult = schema.validate({ name, email });
+  const schema = Joi.object(
+    {
+      name: Joi.string().required(),
+      email: Joi.string().max(20).required(),
+      password: Joi.string().max(20).required()
+  });
+  const validationResult = schema.validate({name, email, password});
   if (validationResult.error != null) {
     console.log("schema error" + JSON.stringify(validationResult));
     console.log(validationResult.error);
@@ -176,7 +183,7 @@ app.post("/loggingin", async (req, res) => {
     return;
   }
   const result = await userCollection
-    .find({ name: name })
+    .find({ email: email })
     .project({ name: 1, email: 1, password: 1, _id: 1 })
     .toArray();
   console.log(result);
@@ -256,7 +263,7 @@ app.get("/members", async (req, res) => {
       req.session.restore;
       console.log(req.session);
     }
-  }
+  } 
   const result = await userCollection
     .find({ name: name })
     .project({ name: 1, email: 1, password: 1, _id: 1 })
