@@ -13,7 +13,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 12;
 
 const Joi = require("joi");
-const expireTime = 1 * 60 * 60 * 1000; //expires in 1 hour
+const expireTime = 60 * 60 * 1000; //expires in 1 hour
 
 const mongodb_database = process.env.MONGODB_DATABASE;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
