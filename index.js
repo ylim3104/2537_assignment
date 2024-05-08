@@ -14,7 +14,9 @@ const saltRounds = 12;
 
 const Joi = require("joi");
 const expireTime = 60 * 60 * 1000; //expires in 1 hour
-
+const mongodb_host = process.env.MONGODB_HOST;
+const mongodb_user = process.env.MONGODB_USER;
+const mongodb_password = process.env.MONGODB_PASSWORD;
 const mongodb_database = process.env.MONGODB_DATABASE;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
@@ -25,7 +27,7 @@ const userCollection = database.db(mongodb_database).collection("user");
 app.use(express.urlencoded({ extended: false }));
 
 var mongoStore = MongoStore.create({
-  mongoUrl: `mongodb+srv://yelinim8:Amber2004!@cluster0.a7mcwmq.mongodb.net/sessions`,
+  mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_host}/sessions`,
   crypto: {
     secret: mongodb_session_secret,
   },
@@ -169,13 +171,12 @@ app.post("/loggingin", async (req, res) => {
   var name = req.session.name;
   var email = req.body.email;
   var password = req.body.password;
-  const schema = Joi.object(
-    {
-      name: Joi.string().required(),
-      email: Joi.string().max(20).required(),
-      password: Joi.string().max(20).required()
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().max(20).required(),
+    password: Joi.string().max(20).required(),
   });
-  const validationResult = schema.validate({name, email, password});
+  const validationResult = schema.validate({ name, email, password });
   if (validationResult.error != null) {
     console.log("schema error" + JSON.stringify(validationResult));
     console.log(validationResult.error);
@@ -263,7 +264,7 @@ app.get("/members", async (req, res) => {
       req.session.restore;
       console.log(req.session);
     }
-  } 
+  }
   const result = await userCollection
     .find({ name: name })
     .project({ name: 1, email: 1, password: 1, _id: 1 })
