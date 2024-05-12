@@ -1,0 +1,21 @@
+<%- include ("templates/header") %>
+    <% if (nameValidation.error != null) { %>
+        Name is required.
+        <br>
+    <% } %>
+    <% if (emailValidation.error != null) { %>
+        Email is required.
+        <br>
+    <% } %>
+    <% if (passwordValidation.error != null) { %>
+        Password is required.
+        <br>
+    <% } %>
+    <% if (
+        nameValidation.error != null ||
+        emailValidation.error != null ||
+        passwordValidation.error != null
+    ) { %>
+        <a href="/signup">Try again</a>
+    <% } %>
+<%- include ("templates/footer") %>

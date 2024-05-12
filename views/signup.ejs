@@ -1,0 +1,22 @@
+<%- include("templates/header") %>
+<div class="mt-5 mx-5">
+<h6 style="font-family:Reddit Mono;">CREATE USER</h2>
+    <form action='/signupSubmit' method='post'>
+        <div class="d-flex flex-column pt-1">
+            <div class="pt-1">
+                <input name='name' type='text' placeholder='name'>
+            </div>
+            <div class="pt-1">
+                <input name='email' type='email' placeholder='email'>
+            </div>
+            <div class="pt-1">
+                <input name='password' type='password' placeholder='password'>
+            </div>
+        <div class="justify-content-center pt-2">
+            <button class="btn btn-dark me-2">SUBMIT</button>
+            <button class="btn btn-dark" onClick="location.href='/'">BACK</button>
+        </div>
+        </div>
+    </form>
+</div>
+<%- include("templates/footer") %>

@@ -1,0 +1,6 @@
+<li>
+  <a href="<%= navLink.link %>" class="nav-link text-<% if (navLink.link == currentURL) { %>secondary<% } else { %>white<% } %>">
+    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="<%= navLink.svg %>" fill=<% if (navLink.link == currentURL) { %>"#6c757d"<% } else { %>"white"<% } %>></use></svg>
+      <%= navLink.name %>
+  </a>
+</li>

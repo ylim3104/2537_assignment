@@ -1,0 +1,17 @@
+<%- include("templates/header") %>
+<div class="mt-5 mx-5">
+  <div class="d-flex flex-column">
+    <div class="pt-1">
+      <h4 style="font-family:DM Serif Display">
+        You are already logged in!
+        <br> 
+        Would you like to log out or sign out and log in to a different account?
+      </h4>
+      <div class="justify-content-center pt-2">
+        <button class="btn btn-dark me-2" onClick="location.href='/logout'">LOG OUT</button>
+        <button class="btn btn-dark" onClick="location.href='/signout'">SIGN OUT</button>
+    </div>
+    </div>
+    <%- include("templates/footer") %>
+  </div>
+</div>

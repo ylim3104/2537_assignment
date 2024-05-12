@@ -1,0 +1,16 @@
+<%- include("templates/header") %>
+<div class="mt-5 mx-5">
+  <h1 style="font-family: 'Bree Serif';">Hello, <%= name %>.</h1>
+    <br>
+    <div class="row mb-3 text-center">
+      <div class="col-md-4 themed-grid-col pb-3"><img class="img-fluid" src='/babyCat.gif' style='width:400px;'></div>
+      <div class="col-md-4 themed-grid-col pb-3"><img class="img-fluid" src='/computerCat.gif' style='width:400px;'></div>
+      <div class="col-md-4 themed-grid-col pb-3"><img class="img-fluid" src='/surprisedCat.gif' style='width:400px;'></div>
+    </div>
+    <div class="justify-content-center pt-2">
+    <button class="btn btn-dark me-2" onClick="location.href='/'">MAIN PAGE</button>
+    <button class="btn btn-dark me-2" onClick="location.href='/logout'">LOG OUT</button>
+    <button class="btn btn-dark" onClick="location.href='/signout'">SIGN OUT</button>
+    </div>
+</div>
+<%- include("templates/footer") %>

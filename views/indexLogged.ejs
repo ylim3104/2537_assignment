@@ -1,0 +1,16 @@
+<%- include("templates/header") %>
+<div class="mt-5 mx-5">
+    <div class="d-flex flex-column">
+        <div class="pt-1">
+            <h1 style="font-family:Bree Serif;">Hello <%= name %>!</h1>
+        </div>
+        <div class="pt-1">
+            <button class="btn btn-dark" onClick="location.href='/members'">GO TO MEMBER'S AREA</button>
+        </div>
+        <div class="pt-1">
+            <button class="btn btn-dark" onClick="location.href='/logout'">LOG OUT</button>
+        </div>
+        <div class="pt-1">
+            <button class="btn btn-dark" onClick="location.href='/signout'">SIGN OUT</button>
+        </div>
+<%- include("templates/footer") %>

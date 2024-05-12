@@ -1,0 +1,21 @@
+<div class="d-flex flex-row mb-3">
+                <div class="col-md-4 themed-grid-col pt-2">
+                    <h6 style="font-family:Reddit Mono;">
+                        <%= user.name %>
+                        <% if (user.user_type == "admin") { %>
+                            (ADMIN)
+                    </h6>
+                </div>
+                    <div class="d-flex p-2 bd-highlight mx-3">
+                        <button class="btn btn-dark" onClick="location.href='/demote/<%= user.name %>'">DEMOTE TO USER</button>
+                    </div>
+                </div>
+        <% } else { %>
+            (USER)
+                    </h6>
+                </div>
+                    <div class="d-flex p-2 bd-highlight mx-3">            
+                        <button class="btn btn-dark" onClick="location.href='/promote/<%= user.name %>'">PROMOTE TO ADMIN</button>
+                    </div>  
+                </div>
+        <% } %>
